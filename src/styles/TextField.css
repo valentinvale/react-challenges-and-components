@@ -1,0 +1,30 @@
+
+.text-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 50%
+}
+
+.text-field label {
+    font-size: 1.5rem;
+    color:rgb(37, 30, 78);
+    font-weight: bolder;
+}
+
+.text-field input {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+
+    border: none;
+    border-radius: 5px;
+
+    padding: 10px;
+
+    font-size: 1rem;
+}
+
+.text-field input:focus {
+    outline: none;
+    box-shadow: 0 0 5px aqua;
+}
