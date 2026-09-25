@@ -1,22 +1,13 @@
-import Input from "./components/TextFieldChallenge/Input";
-import Label from "./components/TextFieldChallenge/Label";
-import TextField from "./components/TextFieldChallenge/TextField";
-
 import "./App.css";
+import Profile from "./components/AddExperienceForm/Profile";
 import "./styles/TextField.css";
+//import TextFieldChallengeApp from "./components/TextFieldChallenge/TextFieldChallendeApp";
 
 function App() {
   return (
     <div className="main-container">
-      <TextField className="text-field">
-        <Label>First Name</Label>
-        <Input />
-      </TextField>
-
-      <TextField className="text-field">
-        <Label>Last Name</Label>
-        <Input />
-      </TextField>
+      {/* <TextFieldChallengeApp /> */}
+      <Profile />
     </div>
   );
 }
