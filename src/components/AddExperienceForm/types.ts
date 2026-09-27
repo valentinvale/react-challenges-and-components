@@ -1,14 +1,14 @@
 export type JobExperience = {
     jobTitle: string;
-    employmentType: string;
+    employmentType?: "Full-time" | "Part-time" | "Internship" | "Contract" 
     company: string;
     isCurrent: boolean;
     startDate: {
-        month: string;
+        month: "January" | "February" | "March" | "April" | "May" | "June" | "July" | "August" | "September" | "October" | "November" | "December";
         year: string;
     };
     endDate?: {
-        month: string;
+        month: "January" | "February" | "March" | "April" | "May" | "June" | "July" | "August" | "September" | "October" | "November" | "December";
         year: string;
     }
 }

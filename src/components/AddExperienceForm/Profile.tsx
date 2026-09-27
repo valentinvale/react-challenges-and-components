@@ -38,9 +38,13 @@ function Profile() {
           </div>
         ))}
         {showAddExperienceForm && (
-          <dialog className="fixed inset-0 bg-black/60 flex items-baseline pt-10 justify-center w-full h-full">
+          <dialog
+            open
+            className="fixed inset-0 bg-black/60 flex items-baseline pt-10 justify-center w-full h-full"
+          >
             <div className="bg-white rounded shadow-lg container w-3xl">
               <AddExperienceForm
+                visible={showAddExperienceForm}
                 onSave={(newExperience: JobExperience) => {
                   setExperienceList((prev) => [newExperience, ...prev]);
                   setShowAddExperienceForm(false);
