@@ -45,7 +45,7 @@ function Profile() {
             <div className="bg-white rounded shadow-lg container w-3xl">
               <AddExperienceForm
                 visible={showAddExperienceForm}
-                onSave={(newExperience: JobExperience) => {
+                onSave={async (newExperience: JobExperience) => {
                   setExperienceList((prev) => [newExperience, ...prev]);
                   setShowAddExperienceForm(false);
                 }}
