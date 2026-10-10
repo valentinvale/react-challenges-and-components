@@ -8,7 +8,15 @@ function Profile() {
     useState<JobExperience[]>(sampleJobExperiences);
   const [showAddExperienceForm, setShowAddExperienceForm] = useState(false);
   return (
-    <div className="bg-gray-300 min-h-screen p-4">
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+      className="bg-gray-300 min-h-screen p-4"
+    >
       <div className="container mx-auto p-4 max-w-4xl border-1 border-gray-400 rounded-xl bg-white shadow-lg">
         <h1 className="text-3xl font-bold mb-6">My Linkedin Profile</h1>
         <div className="flex items-center justify-between p-4 bg-gray-200">
@@ -38,23 +46,18 @@ function Profile() {
           </div>
         ))}
         {showAddExperienceForm && (
-          <dialog
-            open
-            className="fixed inset-0 bg-black/60 flex items-baseline pt-10 justify-center w-full h-full"
-          >
-            <div className="bg-white rounded shadow-lg container w-3xl">
-              <AddExperienceForm
-                visible={showAddExperienceForm}
-                onSave={async (newExperience: JobExperience) => {
-                  setExperienceList((prev) => [newExperience, ...prev]);
-                  setShowAddExperienceForm(false);
-                }}
-                onCancel={() => {
-                  setShowAddExperienceForm(false);
-                }}
-              />
-            </div>
-          </dialog>
+          <div className="bg-white rounded shadow-lg container w-3xl">
+            <AddExperienceForm
+              visible={showAddExperienceForm}
+              onSave={async (newExperience: JobExperience) => {
+                setExperienceList((prev) => [newExperience, ...prev]);
+                setShowAddExperienceForm(false);
+              }}
+              onCancel={() => {
+                setShowAddExperienceForm(false);
+              }}
+            />
+          </div>
         )}
       </div>
     </div>

@@ -1,0 +1,44 @@
+.add-experience-form {
+    background-color: white;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 99%;
+    height: 99%;
+
+    overflow: hidden;
+
+    border-radius: 5px;
+}
+
+.form-header {
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid grey;
+    padding: 0 20px;
+    min-height: 30px;
+    align-items: center;
+    z-index: 1;
+}
+
+.form-body {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.notification-container {
+    margin-top: 0;
+    position: sticky;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+    height: 30px;
+    align-items: center;
+    background-color: lightgray;
+}
