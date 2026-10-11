@@ -6,12 +6,12 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 99%;
+    width: 60%;
     height: 99%;
 
     overflow: hidden;
 
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 .form-header {
@@ -21,9 +21,28 @@
     justify-content: space-between;
     border-bottom: 1px solid grey;
     padding: 0 20px;
-    min-height: 30px;
+    height: 70px;
     align-items: center;
     z-index: 1;
+    font-size: 1.3rem;
+}
+
+.form-header button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.form-header button:hover {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: grey;
+}
+
+.form-header button i {
+    font-size: 1.3rem;
 }
 
 .form-body {
@@ -38,7 +57,97 @@
     flex-direction: row;
     justify-content: space-between;
     padding: 20px;
-    height: 30px;
+    height: 50px;
     align-items: center;
-    background-color: lightgray;
+    background-color:rgb(208, 235, 243);
+    font-size: 1.1rem;
+}
+
+.indications-container {
+    padding: 20px;
+}
+
+.learn-more-button {
+    color: blue;
+}
+
+.learn-more-button:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.form-item {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    margin-bottom: 20px;
+    gap: 5px;
+    font-size: 1.1rem;
+}
+
+.form-item input {
+    height: 20px;
+}
+
+.form-item select {
+    height: 30px;
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+
+.form-item.form-checkbox {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1.1rem;
+}
+
+.form-item.form-checkbox input[type="checkbox"] {
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+}
+
+/* de facut checkmark-ul alb */
+.form-item.form-checkbox input[type="checkbox"]:checked {
+    accent-color:darkseagreen;
+    color: white;
+}
+
+.form-item.form-date .date-inputs{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+}
+
+.form-item.form-date .date-inputs select {
+    flex: 1;
+}
+
+.form-footer {
+    padding: 0 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: row;
+    border-top: 1px solid grey;
+    height: 70px;
+}
+
+.form-footer button {
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 0 20px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    height: 40px;
+    transition: background-color 0.3s ease;
+}
+
+.form-footer button:hover {
+    background-color: darkblue;
 }

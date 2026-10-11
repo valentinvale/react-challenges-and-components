@@ -86,7 +86,7 @@ export default function AddExperienceForm({
         <div className="form-header">
           <h2>Add experience</h2>
           <button type="button" onClick={onCancel}>
-            Close
+            <i className="fa-solid fa-x"></i>
           </button>
         </div>
         <div className="form-body">
@@ -150,16 +150,16 @@ export default function AddExperienceForm({
               onChange={(e) => setCompanyName(e.target.value)}
             />
           </div>
-          <div className="form-item">
-            <label htmlFor="current-job">
-              I am currently working in this role
-            </label>
+          <div className="form-item form-checkbox">
             <input
               id="current-job"
               type="checkbox"
               checked={isCurrentJob}
               onChange={() => setIsCurrentJob(!isCurrentJob)}
             />
+            <label htmlFor="current-job">
+              I am currently working in this role
+            </label>
           </div>
           <div className="form-item form-date">
             <label htmlFor="start-date">Start date*</label>
@@ -234,7 +234,9 @@ export default function AddExperienceForm({
             </div>
           </div>
         </div>
-        <button type="submit">Submit</button>
+        <div className="form-footer">
+          <button type="submit">Save</button>
+        </div>
       </form>
     )
   );
