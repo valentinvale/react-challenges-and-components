@@ -52,16 +52,69 @@
 
 .notification-container {
     margin-top: 0;
-    position: sticky;
     display: flex;
     flex-direction: row;
+    gap: 20px;
     justify-content: space-between;
     padding: 20px;
     height: 50px;
     align-items: center;
     background-color:rgb(208, 235, 243);
     font-size: 1.1rem;
+
+    --toggle-width: 40px;
+    --toggle-height: calc(var(--toggle-width) / 2);
+    --toggle-border-radius: calc(var(--toggle-height) / 2);
+    --toggle-offset: calc(var(--toggle-width) * 10/100)
 }
+
+.notification-label {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.notification-label:hover {
+    cursor: pointer;
+}
+
+.notification-input {
+    display: none;
+}
+
+.notification-toggle::after {
+    content: "";
+    background-color: white;
+    position: absolute;
+    top: calc(var(--toggle-offset) / 2);
+    left: calc(var(--toggle-offset) / 2);
+    width: calc(var(--toggle-width) / 2 - var(--toggle-offset));
+    height: calc(var(--toggle-height) - var(--toggle-offset));
+    border-radius: var(--toggle-border-radius);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s;
+}
+
+.notification-input:checked ~ .notification-toggle {
+    background-color: darkcyan;
+}
+
+.notification-input:checked ~ .notification-toggle::after {
+    transform: translateX(calc(var(--toggle-width) / 2))
+}
+
+.notification-toggle {
+    position: relative;
+    top: 0;
+    left: 0;
+
+    width: var(--toggle-width);
+    height: var(--toggle-height);
+    border-radius: var(--toggle-border-radius);
+    background-color: darkgrey;
+    transition: background-color 0.3s ease;
+}
+
 
 .indications-container {
     padding: 20px;
@@ -124,6 +177,14 @@
 
 .form-item.form-date .date-inputs select {
     flex: 1;
+}
+
+.form-item-error {
+    font-size: 1rem;
+}
+
+.form-item-error i {
+    color: rgb(220, 25, 25);
 }
 
 .form-footer {

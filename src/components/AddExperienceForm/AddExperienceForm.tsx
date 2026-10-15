@@ -42,13 +42,16 @@ export default function AddExperienceForm({
 
   const [notifyNetwork, setNotifyNetwork] = useState<boolean>(false);
 
+  const [submitted, setSubmitted] = useState<boolean>(false);
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setSubmitted(true);
 
     const endDate = endMonth && endYear ? { endMonth, endYear } : undefined;
 
     if (!jobTitle || !companyName || !startMonth || !startYear) {
-      alert("Please fill in all required fields.");
+      //alert("Please fill in all required fields.");
       console.log(jobTitle, companyName, startMonth, startYear);
       return;
     }
@@ -72,7 +75,7 @@ export default function AddExperienceForm({
     setStartYear("");
     setEndMonth(undefined);
     setEndYear("");
-
+    setSubmitted(false);
     onCancel();
   }
 
@@ -82,31 +85,42 @@ export default function AddExperienceForm({
         className={`${rest.className} add-experience-form`}
         onSubmit={handleSubmit}
         {...rest}
+        noValidate
       >
         <div className="form-header">
           <h2>Add experience</h2>
-          <button type="button" onClick={onCancel}>
+          <button
+            type="button"
+            onClick={() => {
+              setSubmitted(false);
+              onCancel();
+            }}
+          >
             <i className="fa-solid fa-x"></i>
           </button>
         </div>
         <div className="form-body">
           <div className="notification-container">
             <p className="notification-p">
+              <b>Notify network</b>
+              <br />
               Turn on to notify your network of key profile changes (such as new
               jobs) and work anniversaries. Updates can take up to 2 hours.
               Learn more at{" "}
               <a className="learn-more-button">sharing profile changes</a>.
             </p>
             <div className="notification-toggle-container">
-              <label htmlFor="notification-toggle">
+              <label className="notification-label" htmlFor="notifications">
                 {notifyNetwork ? "On" : "Off"}
+                <input
+                  type="checkbox"
+                  id="notifications"
+                  className="notification-input"
+                  checked={notifyNetwork}
+                  onChange={() => setNotifyNetwork(!notifyNetwork)}
+                />
+                <div className="notification-toggle"></div>
               </label>
-              <input
-                type="checkbox"
-                id="notification-toggle"
-                checked={notifyNetwork}
-                onChange={() => setNotifyNetwork(!notifyNetwork)}
-              />
             </div>
           </div>
           <div className="indications-container">
@@ -121,6 +135,12 @@ export default function AddExperienceForm({
               value={jobTitle}
               onChange={(e) => setJobTitle(e.target.value)}
             />
+            {submitted && !jobTitle && (
+              <span className="form-item-error">
+                <i className="fa-solid fa-circle-xmark"></i> Title is a required
+                field
+              </span>
+            )}
           </div>
           <div className="form-item">
             <label htmlFor="employment-type">Employment type</label>
@@ -149,6 +169,12 @@ export default function AddExperienceForm({
               value={companyName}
               onChange={(e) => setCompanyName(e.target.value)}
             />
+            {submitted && !companyName && (
+              <span className="form-item-error">
+                <i className="fa-solid fa-circle-xmark"></i> Company is a
+                required field
+              </span>
+            )}
           </div>
           <div className="form-item form-checkbox">
             <input
@@ -191,6 +217,12 @@ export default function AddExperienceForm({
                 ))}
               </select>
             </div>
+            {submitted && (!startMonth || !startYear) && (
+              <span className="form-item-error">
+                <i className="fa-solid fa-circle-xmark"></i> Start date is a
+                required field
+              </span>
+            )}
           </div>
           <div className="form-item form-date">
             <label htmlFor="end-date">End date*</label>
@@ -232,6 +264,12 @@ export default function AddExperienceForm({
                 )}
               </select>
             </div>
+            {submitted && !isCurrentJob && (!endMonth || !endYear) && (
+              <span className="form-item-error">
+                <i className="fa-solid fa-circle-xmark"></i> End date is a
+                required field
+              </span>
+            )}
           </div>
         </div>
         <div className="form-footer">
