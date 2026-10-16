@@ -48,12 +48,28 @@ export default function AddExperienceForm({
     event.preventDefault();
     setSubmitted(true);
 
-    const endDate = endMonth && endYear ? { endMonth, endYear } : undefined;
+    const endDate =
+      !isCurrentJob && endMonth && endYear
+        ? { month: endMonth, year: endYear }
+        : undefined;
 
     if (!jobTitle || !companyName || !startMonth || !startYear) {
       //alert("Please fill in all required fields.");
       console.log(jobTitle, companyName, startMonth, startYear);
       return;
+    }
+
+    if (!isCurrentJob && (!endMonth || !endYear)) {
+      return;
+    }
+
+    if (!isCurrentJob) {
+      const start = Number(startYear) * 12 + months.indexOf(startMonth);
+      const end = Number(endYear) * 12 + months.indexOf(endMonth!);
+
+      if (end < start) {
+        return;
+      }
     }
 
     const jobExperience: JobExperience = {
@@ -62,7 +78,7 @@ export default function AddExperienceForm({
       company: companyName,
       isCurrent: isCurrentJob,
       startDate: { month: startMonth, year: startYear },
-      ...(endDate && { endDate: { month: endMonth, year: endYear } }),
+      ...(endDate && { endDate }),
     };
 
     console.log("Submitting job experience:", jobExperience);
@@ -146,7 +162,7 @@ export default function AddExperienceForm({
             <label htmlFor="employment-type">Employment type</label>
             <select
               id="employment-type"
-              value={employmentType}
+              value={employmentType ?? ""}
               onChange={(e) =>
                 e.target.value
                   ? setEmploymentType(e.target.value as EmploymentType)
@@ -192,28 +208,40 @@ export default function AddExperienceForm({
             <div className="date-inputs">
               <select
                 id="start-date"
-                value={startMonth}
-                onChange={(e) =>
+                value={startMonth ?? ""}
+                onChange={(e) => {
                   e.target.value
                     ? setStartMonth(e.target.value as Month)
-                    : setStartMonth(undefined)
-                }
+                    : setStartMonth(undefined);
+
+                  setEndMonth(undefined);
+                  setEndYear("");
+                }}
               >
                 <option value="">Month</option>
                 {months.map((month) => (
-                  <option value={month}>{month}</option>
+                  <option key={month} value={month}>
+                    {month}
+                  </option>
                 ))}
               </select>
               <select
                 value={startYear}
-                onChange={(e) => setStartYear(e.target.value)}
+                onChange={(e) => {
+                  setStartYear(e.target.value);
+
+                  setEndMonth(undefined);
+                  setEndYear("");
+                }}
               >
                 <option value="">Year</option>
                 {Array.from(
                   { length: 100 },
                   (_, i) => new Date().getFullYear() - i,
                 ).map((year) => (
-                  <option value={year}>{year}</option>
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
                 ))}
               </select>
             </div>
@@ -230,7 +258,7 @@ export default function AddExperienceForm({
               <select
                 id="end-date"
                 disabled={isCurrentJob}
-                value={endMonth}
+                value={endMonth ?? ""}
                 onChange={(e) =>
                   e.target.value
                     ? setEndMonth(e.target.value as Month)
@@ -243,14 +271,19 @@ export default function AddExperienceForm({
                     (months.findIndex((m) => m === month) >=
                       months.findIndex((m) => m === startMonth) ||
                       startYear !== endYear) && (
-                      <option value={month}>{month}</option>
+                      <option key={month} value={month}>
+                        {month}
+                      </option>
                     ),
                 )}
               </select>
               <select
                 disabled={isCurrentJob}
                 value={endYear}
-                onChange={(e) => setEndYear(e.target.value)}
+                onChange={(e) => {
+                  setEndYear(e.target.value);
+                  setEndMonth(undefined);
+                }}
               >
                 <option value="">Year</option>
                 {Array.from(
@@ -259,7 +292,9 @@ export default function AddExperienceForm({
                 ).map(
                   (year) =>
                     year >= parseInt(startYear) && (
-                      <option value={year}>{year}</option>
+                      <option key={year} value={year}>
+                        {year}
+                      </option>
                     ),
                 )}
               </select>
