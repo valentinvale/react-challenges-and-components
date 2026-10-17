@@ -97,6 +97,8 @@ export default function AddExperienceForm({
 
   return (
     visible && (
+      <>
+      <div className="form-overlay"></div>
       <form
         className={`${rest.className} add-experience-form`}
         onSubmit={handleSubmit}
@@ -311,6 +313,7 @@ export default function AddExperienceForm({
           <button type="submit">Save</button>
         </div>
       </form>
+      </>
     )
   );
 }

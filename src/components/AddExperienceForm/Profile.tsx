@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { type JobExperience } from "./types";
-import AddExperienceForm from "./AddExperienceForm";
+//import AddExperienceForm from "./AddExperienceForm";
 import { sampleJobExperiences } from "./sample-data";
+import AddExperienceFormWithLibs from "./AddExperienceFormWithLibs";
 
 function Profile() {
   const [experienceList, setExperienceList] =
@@ -47,7 +48,7 @@ function Profile() {
         ))}
         {showAddExperienceForm && (
           <div className="bg-white rounded shadow-lg container w-3xl">
-            <AddExperienceForm
+            <AddExperienceFormWithLibs
               visible={showAddExperienceForm}
               onSave={async (newExperience: JobExperience) => {
                 setExperienceList((prev) => [newExperience, ...prev]);
